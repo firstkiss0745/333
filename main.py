@@ -41,7 +41,7 @@ output_dir = 'pages'
 os.makedirs(output_dir, exist_ok=True)
 
 # ปรับ path ตามที่ใช้งานจริง
-pages = convert_from_path('barcode_tube.pdf', 300, poppler_path=r'C:\poppler-24.08.0\Library\bin')
+pages = convert_from_path('barcode_tube (1).pdf', 300, poppler_path=r'C:\poppler-24.08.0\Library\bin')
 reader = easyocr.Reader(['th', 'en'], gpu=False)
 
 data = []
@@ -63,7 +63,7 @@ for i, page in enumerate(pages):
 
     # ดึง name, lab_source, specimen_note
     for text, conf in texts:
-        if not name and (("นาย" in text or "mr." in text.lower()) and len(text) > 6):
+        if not name and (("นาย", "น.ส.", "นางสาว" in text or "mr.", "miss", "mrs." in text.lower()) and len(text) > 6):
             name = text
         elif not lab_source and ("โรงพยาบาล" in text or "hospital" in text.lower()):
             lab_source = text
